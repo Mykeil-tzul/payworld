@@ -24,6 +24,12 @@ Visa can also respond on an issuer’s behalf in some circumstances. The demo mo
 - **Duplicate.** A repeat with the same operation key reuses the stored result. Conflicting commands with the same key are rejected. No new issuer request or ledger entry is created.
 - **Refund.** Settle the sale, submit a full refund, and watch the simulated merchant cash reconciliation return to zero.
 
+### Follow a timeout from the café
+
+1. Choose **Timeout** and leave the purchase at **$5.75**. Start the simulation and finish stepping through the messages. The café sees **Outcome unknown** because it missed the issuer's response.
+2. Choose **Retry same key**. The café still has an unknown outcome, and the engine has recorded one authorization.
+3. Choose **Resolve original payment** to recover the issuer's decision. Then choose **Capture**, **Clear**, and **Settle**, finishing any remaining messages after each step. The merchant ledger now reconciles to $5.75.
+
 After settlement, try **Redeliver settlement webhook**. It illustrates a common design where a payment service retries a notification and the recipient deduplicates by event ID. It's a fictional payment-service notification, not a Visa webhook contract.
 
 ## Engineering notes
